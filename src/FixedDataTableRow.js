@@ -74,6 +74,14 @@ class FixedDataTableRowImpl extends React.Component {
     ]),
 
     /**
+    * The row divider.
+    */
+    rowDivider: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func,
+    ]),
+
+    /**
      * The row index.
      */
     index: PropTypes.number.isRequired,
@@ -231,6 +239,7 @@ class FixedDataTableRowImpl extends React.Component {
       />;
     var scrollableColumnsWidth = this._getColumnsWidth(this.props.scrollableColumns);
     var columnsRightShadow = this._renderColumnsRightShadow(fixedColumnsWidth + scrollableColumnsWidth);
+    var rowDivider = this._getRowDivider();
     var rowExpanded = this._getRowExpanded(subRowHeight);
     var rowExpandedStyle = {
       height: subRowHeight,
@@ -266,14 +275,20 @@ class FixedDataTableRowImpl extends React.Component {
         onTouchEnd={this.props.onTouchEnd ? this._onTouchEnd : null}
         onTouchMove={this.props.onTouchMove ? this._onTouchMove : null}
         style={style}>
-        <div className={cx('fixedDataTableRowLayout/body')}>
-          {fixedColumns}
-          {scrollableColumns}
-          {columnsLeftShadow}
-          {fixedRightColumns}
-          {fixedRightColumnsShadow}
-          {scrollbarSpacer}
-        </div>
+        {rowDivider ?
+          <div className={cx('fixedDataTableRowLayout/body')}>
+            {rowDivider}
+            {scrollbarSpacer}
+          </div> :
+          <div className={cx('fixedDataTableRowLayout/body')}>
+            {fixedColumns}
+            {scrollableColumns}
+            {columnsLeftShadow}
+            {fixedRightColumns}
+            {fixedRightColumnsShadow}
+            {scrollbarSpacer}
+          </div>
+        }
         {rowExpanded && <div
           className={cx('fixedDataTableRowLayout/rowExpanded')}
           style={rowExpandedStyle}>
@@ -291,6 +306,25 @@ class FixedDataTableRowImpl extends React.Component {
     }
     return width;
   };
+
+  _getRowDivider = () => /*?object*/ {
+    if (this.props.rowDivider) {
+      var rowDividerProps = {
+        rowIndex: this.props.index,
+        height: this.props.height,
+        width: this.props.width,
+      };
+
+      var rowDivider;
+      if (React.isValidElement(this.props.rowDivider)) {
+        rowDivider = React.cloneElement(this.props.rowDivider, rowDividerProps);
+      } else if (typeof this.props.rowDivider === 'function') {
+        rowDivider = this.props.rowDivider(rowDividerProps);
+      }
+
+      return rowDivider;
+    }
+  }
 
   _getRowExpanded = (/*number*/ subRowHeight) => /*?object*/ {
     if (this.props.rowExpanded) {

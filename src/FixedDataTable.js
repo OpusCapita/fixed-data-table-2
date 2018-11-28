@@ -223,12 +223,37 @@ var FixedDataTable = createReactClass({
     * If you pass in a function, you will receive the same props object as the
     * first argument.
     */
-   rowExpanded: PropTypes.oneOfType([
-     PropTypes.element,
-     PropTypes.func,
-   ]),
+    rowExpanded: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func,
+    ]),
 
     /**
+    * The row divider for table row.
+    * This can either be a React element, or a function that generates
+    * a React Element. By default, the React element passed in can expect to
+    * receive the following props:
+    *
+    * ```
+    * props: {
+    *   rowIndex; number // (the row index)
+    *   height: number // (supplied from the Table or rowHeightGetter)
+    *   width: number // (supplied from the Table)
+    * }
+    * ```
+    *
+    * Because you are passing in your own React element, you can feel free to
+    * pass in whatever props you may want or need.
+    *
+    * If you pass in a function, you will receive the same props object as the
+    * first argument.
+    */
+    rowDivider: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func,
+    ]),
+
+      /**
      * To get any additional CSS classes that should be added to a row,
      * `rowClassNameGetter(index)` is called.
      */
@@ -865,6 +890,7 @@ var FixedDataTable = createReactClass({
         rowHeightGetter={state.rowHeightGetter}
         subRowHeight={state.subRowHeight}
         subRowHeightGetter={state.subRowHeightGetter}
+        rowDivider={state.rowDivider}
         rowExpanded={state.rowExpanded}
         rowKeyGetter={state.rowKeyGetter}
         scrollLeft={state.scrollX}

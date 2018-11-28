@@ -48,6 +48,10 @@ var FixedDataTableBufferedRows = createReactClass({
     rowHeightGetter: PropTypes.func,
     subRowHeight: PropTypes.number,
     subRowHeightGetter: PropTypes.func,
+      rowDivider: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func,
+    ]),
     rowExpanded: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.func,
@@ -168,6 +172,7 @@ var FixedDataTableBufferedRows = createReactClass({
           width={props.width}
           height={currentRowHeight}
           subRowHeight={currentSubRowHeight}
+          rowDivider={props.rowDivider}
           rowExpanded={props.rowExpanded}
           scrollLeft={Math.round(props.scrollLeft)}
           offsetTop={Math.round(rowOffsetTop)}
