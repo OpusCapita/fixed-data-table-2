@@ -531,7 +531,7 @@ module.exports = g;
  */
 
 var invariant = function invariant(condition, format, a, b, c, d, e, f) {
-  if (true) {
+  if (false) {
     if (format === undefined) {
       throw new Error('invariant requires an error message argument');
     }
@@ -2799,7 +2799,7 @@ var FixedDataTableColumnGroup = function (_React$Component) {
   _createClass(FixedDataTableColumnGroup, [{
     key: 'render',
     value: function render() {
-      if (true) {
+      if (false) {
         throw new Error('Component <FixedDataTableColumnGroup /> should never render');
       }
       return null;
@@ -2900,7 +2900,7 @@ var FixedDataTableColumn = function (_React$Component) {
   _createClass(FixedDataTableColumn, [{
     key: 'render',
     value: function render() {
-      if (true) {
+      if (false) {
         throw new Error('Component <FixedDataTableColumn /> should never render');
       }
       return null;
@@ -7437,7 +7437,7 @@ var EventListener = {
         }
       };
     } else {
-      if (true) {
+      if (false) {
         console.error('Attempted to listen to events during the capture phase on a ' + 'browser that does not support the capture phase. Your application ' + 'will not receive some events.');
       }
       return {
